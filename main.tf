@@ -47,7 +47,7 @@ module "lambda_function" {
   description            = "updates target-group with IP from RDS db_instance(s)"
   source_path            = "${path.module}/lambda/"
   handler                = "elb_hostname_as_target.lambda_handler"
-  runtime                = "python3.7"
+  runtime                = "python3.12"
   timeout                = 60
   vpc_subnet_ids         = var.subnet_ids
   vpc_security_group_ids = var.security_group_ids

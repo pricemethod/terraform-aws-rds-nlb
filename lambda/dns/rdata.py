@@ -116,7 +116,7 @@ def _truncate_bitmap(what):
     return what[0:1]
 
 
-class Rdata(object):
+class Rdata:
 
     """Base class for all DNS rdata types.
     """
@@ -310,7 +310,7 @@ class GenericRdata(Rdata):
     __slots__ = ['data']
 
     def __init__(self, rdclass, rdtype, data):
-        super(GenericRdata, self).__init__(rdclass, rdtype)
+        super().__init__(rdclass, rdtype)
         self.data = data
 
     def to_text(self, origin=None, relativize=True, **kw):
@@ -319,7 +319,7 @@ class GenericRdata(Rdata):
     @classmethod
     def from_text(cls, rdclass, rdtype, tok, origin=None, relativize=True):
         token = tok.get()
-        if not token.is_identifier() or token.value != '\#':
+        if not token.is_identifier() or token.value != r'\#':
             raise dns.exception.SyntaxError(
                 r'generic rdata does not start with \#')
         length = tok.get_int()

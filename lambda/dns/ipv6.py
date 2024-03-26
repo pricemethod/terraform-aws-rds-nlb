@@ -91,7 +91,7 @@ def inet_ntoa(address):
         hex = b':'.join(chunks)
     return maybe_decode(hex)
 
-_v4_ending = re.compile(b'(.*):(\d+\.\d+\.\d+\.\d+)$')
+_v4_ending = re.compile(br'(.*):(\d+\.\d+\.\d+\.\d+)$')
 _colon_colon_start = re.compile(b'::.*')
 _colon_colon_end = re.compile(b'.*::$')
 
@@ -118,7 +118,7 @@ def inet_aton(text):
     m = _v4_ending.match(text)
     if not m is None:
         b = bytearray(dns.ipv4.inet_aton(m.group(2)))
-        text = (u"%s:%02x%02x:%02x%02x" % (m.group(1).decode(), b[0], b[1],
+        text = ("{}:{:02x}{:02x}:{:02x}{:02x}".format(m.group(1).decode(), b[0], b[1],
                                            b[2], b[3])).encode()
     #
     # Try to turn '::<whatever>' into ':<whatever>'; if no match try to
